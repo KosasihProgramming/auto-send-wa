@@ -33,29 +33,25 @@ exports.handleIncomingMessage = (req, res) => {
 
   const dataReceive = incomingData.data;
 
-  let text = "";
+  if (dataReceive.is_from_me == false) {
+    const text = `<b>Chat Dari Pasien </b>\n<b>No. WA. Pasien :</b> ${dataReceive.name} \n<b>Pesan</b> : ${dataReceive.message_body}`;
 
-  if (dataReceive.is_from_me == true) {
-    text = `<b>Chat Dari Admin </b>\n<b>Pesan</b> : ${dataReceive.message_body}`;
-  } else {
-    text = `<b>Chat Dari Pasien </b>\n<b>No. WA. Pasien :${dataReceive.name} </b>\n<b>Pesan</b> : ${dataReceive.message_body}`;
+    sendMessage(text)
+      .then(() => {
+        // Mengirimkan respons JSON setelah pesan berhasil dikirim
+        return res.json({
+          success: true,
+          message: "Pesan berhasil dikirim",
+          sentMessage: text,
+        });
+      })
+      .catch((error) => {
+        // Mengirimkan respons JSON jika terjadi kesalahan saat mengirim pesan
+        return res.status(500).json({
+          success: false,
+          message: "Gagal mengirim pesan",
+          error: error.message,
+        });
+      });
   }
-
-  sendMessage(text)
-    .then(() => {
-      // Mengirimkan respons JSON setelah pesan berhasil dikirim
-      return res.json({
-        success: true,
-        message: "Pesan berhasil dikirim",
-        sentMessage: text,
-      });
-    })
-    .catch((error) => {
-      // Mengirimkan respons JSON jika terjadi kesalahan saat mengirim pesan
-      return res.status(500).json({
-        success: false,
-        message: "Gagal mengirim pesan",
-        error: error.message,
-      });
-    });
 };

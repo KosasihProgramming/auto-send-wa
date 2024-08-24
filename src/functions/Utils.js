@@ -16,7 +16,7 @@ const sendMessageWa = async (cabang, data) => {
       {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
-        phone_no: "6281278965100", // Ganti dengan nomor tujuan
+        phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {
@@ -31,6 +31,17 @@ const sendMessageWa = async (cabang, data) => {
     console.error("Gagal mengirim pesan:", error);
   }
 };
+function formatPhoneNumber(input) {
+  // Hilangkan spasi, tanda hubung, dan karakter yang tidak diperlukan
+  let cleaned = input.replace(/\D/g, "");
+
+  // Periksa jika nomor dimulai dengan '62', lalu ubah menjadi '0'
+  if (cleaned.startsWith("62")) {
+    cleaned = "0" + cleaned.slice(2);
+  }
+
+  return cleaned;
+}
 const sendMessageWaGts = async (cabang, data) => {
   const text = `Selamat datang di Griya Terapi Sehat ${cabang}, Bapak/Ibu ${data.nama} ☺️🙏 \n \n Terimakasih sudah percayakan Griya Terapi Sehat sebagai solusi pengobatan anda😊 \n \n  Bagaimana pelayanan di Griya Terapi Sehat ${cabang} ? \n *Silahkan ketik A atau B.*  \n A. Puas ✅ \n B. Kurang puas \n \n Jika berkenan, *tolong berikan alasan atas pilihan Anda Pada Link Dibawah Ini*. Sehat Selalu Bapak/Ibu. Terima kasih 😊👨‍⚕️👩‍⚕️ \nhttps://bit.ly/form-penilaian-kosasih`;
   console.log("GTS", cabang);
@@ -41,7 +52,7 @@ const sendMessageWaGts = async (cabang, data) => {
       {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
-        phone_no: "6281278965100", // Ganti dengan nomor tujuan
+        phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {
