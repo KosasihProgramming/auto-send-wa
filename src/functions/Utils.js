@@ -27,8 +27,10 @@ const sendMessageWa = async (cabang, data) => {
     );
 
     console.log("Pesan berhasil dikirim:", response.data);
+    return response.data;
   } catch (error) {
     console.error("Gagal mengirim pesan:", error);
+    return error;
   }
 };
 function formatPhoneNumber(input) {
@@ -61,10 +63,11 @@ const sendMessageWaGts = async (cabang, data) => {
         },
       }
     );
-
     console.log("Pesan berhasil dikirim:", response.data);
+    return response.data;
   } catch (error) {
     console.error("Gagal mengirim pesan:", error);
+    return error;
   }
 };
 const formatTanggal = (tanggal) => {
