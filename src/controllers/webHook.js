@@ -41,9 +41,12 @@ exports.handleIncomingMessage = (req, res) => {
       console.error("Error reading file:", err);
       return res.status(500).send("Error reading data");
     }
+    console.log("data receive", data);
+    console.log("err receive", err);
+    // Jika data kosong, inisialisasi sebagai array kosong
+    const currentData = data ? JSON.parse(data) : [];
 
-    // Parse data yang ada dan tambahkan data baru
-    const currentData = JSON.parse(data);
+    // Tambahkan data baru
     currentData.push(incomingData);
 
     // Tulis kembali file dengan data baru
