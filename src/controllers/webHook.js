@@ -28,8 +28,7 @@ const path = require("path");
 exports.handleIncomingMessage = (req, res) => {
   const incomingData = req.body;
   const filePath = path.join(__dirname, "../receivedData.json");
-  console.log("result", res);
-  console.log("request", req);
+  console.log("request", req.body);
   // Cek apakah file 'receivedData.json' sudah ada
   if (!fs.existsSync(filePath)) {
     // Jika file belum ada, buat file kosong dengan array
