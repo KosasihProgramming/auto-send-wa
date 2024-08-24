@@ -23,18 +23,20 @@
 // };
 
 const fs = require("fs");
+const path = require("path");
 
 exports.handleIncomingMessage = (req, res) => {
   const incomingData = req.body;
+  const filePath = path.join(__dirname, "../receivedData.json");
 
   // Cek apakah file 'receivedData.json' sudah ada
-  if (!fs.existsSync("receivedData.json")) {
-    // Jika file belum ada, buat file kosong
-    fs.writeFileSync("receivedData.json", "[]"); // Menginisialisasi file sebagai array kosong
+  if (!fs.existsSync(filePath)) {
+    // Jika file belum ada, buat file kosong dengan array
+    fs.writeFileSync(filePath, "[]"); // Menginisialisasi file sebagai array kosong
   }
 
   // Baca file yang sudah ada
-  fs.readFile("receivedData.json", "utf8", (err, data) => {
+  fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file:", err);
       return res.status(500).send("Error reading data");
@@ -45,17 +47,13 @@ exports.handleIncomingMessage = (req, res) => {
     currentData.push(incomingData);
 
     // Tulis kembali file dengan data baru
-    fs.writeFile(
-      "receivedData.json",
-      JSON.stringify(currentData, null, 2),
-      (err) => {
-        if (err) {
-          console.error("Error writing file:", err);
-          return res.status(500).send("Error saving data");
-        }
-        console.log("Data saved successfully");
-        res.status(200).send("Webhook received");
+    fs.writeFile(filePath, JSON.stringify(currentData, null, 2), (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+        return res.status(500).send("Error saving data");
       }
-    );
+      console.log("Data saved successfully");
+      res.status(200).send("Webhook received");
+    });
   });
 };

@@ -17,10 +17,11 @@ const TirtayasaRoute = require("./src/Routes/TirtayasaRoute");
 const PanjangRoute = require("./src/Routes/PanjangRoute");
 const TelukRoute = require("./src/Routes/TelukRoute");
 const PalapaRoute = require("./src/Routes/PalapaRoute");
-
+const bodyParser = require('body-parser');
 const port = 5005;
 const app = express();
 
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
