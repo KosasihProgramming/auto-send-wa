@@ -1,23 +1,23 @@
 const express = require("express");
 const app = express();
-const port = 5005;
+const port = 5000;
 
 const RunAll = async (req, res) => {
   try {
     const fetch = (await import("node-fetch")).default;
     const urls = [
-      `http://202.157.189.177:5005/bugis/send`,
-      `http://202.157.189.177:5005/gading/send`,
-      `http://202.157.189.177:5005/kemiling/send`,
-      `http://202.157.189.177:5005/palapa/send`,
-      `http://202.157.189.177:5005/panjang/send`,
-      `http://202.157.189.177:5005/rajabasa/send`,
-      `http://202.157.189.177:5005/teluk/send`,
-      `http://202.157.189.177:5005/tirta/send`,
-      `http://202.157.189.177:5005/tugu/send`,
-      `http://202.157.189.177:5005/urip/send`,
-      `http://202.157.189.177:5005/gts-kemiling/send`,
-      `http://202.157.189.177:5005/gts-tirta/send`,
+      `http://202.157.189.177:5000/bugis/send`,
+      `http://202.157.189.177:5000/gading/send`,
+      `http://202.157.189.177:5000/kemiling/send`,
+      `http://202.157.189.177:5000/palapa/send`,
+      `http://202.157.189.177:5000/panjang/send`,
+      `http://202.157.189.177:5000/rajabasa/send`,
+      `http://202.157.189.177:5000/teluk/send`,
+      `http://202.157.189.177:5000/tirta/send`,
+      `http://202.157.189.177:5000/tugu/send`,
+      `http://202.157.189.177:5000/urip/send`,
+      `http://202.157.189.177:5000/gts-kemiling/send`,
+      `http://202.157.189.177:5000/gts-tirta/send`,
     ];
 
     // Create an array of fetch promises

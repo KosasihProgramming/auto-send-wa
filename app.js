@@ -17,7 +17,7 @@ const PanjangRoute = require("./src/Routes/PanjangRoute");
 const TelukRoute = require("./src/Routes/TelukRoute");
 const PalapaRoute = require("./src/Routes/PalapaRoute");
 const bodyParser = require("body-parser");
-const port = 5005;
+const port = 5000;
 const app = express();
 
 app.use(bodyParser.json());
@@ -50,7 +50,7 @@ const schedule = "0 13 * * *"; // At 1 PM every day
 
 cron.schedule(schedule, () => {
   axios
-    .get("http://202.157.189.177:5005/run")
+    .get("http://202.157.189.177:5000/run")
     .then((response) => {
       console.log(`Success: ${response.data}`);
     })

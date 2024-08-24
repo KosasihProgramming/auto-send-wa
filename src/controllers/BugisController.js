@@ -11,7 +11,7 @@ const {
   sendMessageWa,
 } = require("../functions/Utils.js");
 
-const port = 5005;
+const port = 5000;
 const token = "wFcCXiNy1euYho73dBGwkPhjjTdODzv6";
 const namaKlinik = "Klinik Pratama Kosasih Amanah";
 // const namaLab = "Laboratorium Kosasih bugis";
@@ -66,7 +66,7 @@ const sendWa = async (req, res) => {
     const fetch = (await import("node-fetch")).default;
 
     // Fetch data untuk setiap akun
-    const response = await fetch(`http://202.157.189.177:5005/bugis/transaksi`);
+    const response = await fetch(`http://202.157.189.177:5000/bugis/transaksi`);
     const dataResponse = await response.json();
 
     // Fungsi untuk menambahkan jeda waktu (delay)
