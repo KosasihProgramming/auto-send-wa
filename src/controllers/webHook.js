@@ -27,15 +27,35 @@ const fs = require("fs");
 exports.handleIncomingMessage = (req, res) => {
   const incomingData = req.body;
 
-  // Simpan data ke file JSON
-  fs.appendFile(
-    "receivedData.json",
-    JSON.stringify(incomingData, null, 2),
-    (err) => {
-      if (err) throw err;
-      console.log("Data saved to receivedData.json");
-    }
-  );
+  // Cek apakah file 'receivedData.json' sudah ada
+  if (!fs.existsSync("receivedData.json")) {
+    // Jika file belum ada, buat file kosong
+    fs.writeFileSync("receivedData.json", "[]"); // Menginisialisasi file sebagai array kosong
+  }
 
-  res.status(200).send("Webhook received");
+  // Baca file yang sudah ada
+  fs.readFile("receivedData.json", "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return res.status(500).send("Error reading data");
+    }
+
+    // Parse data yang ada dan tambahkan data baru
+    const currentData = JSON.parse(data);
+    currentData.push(incomingData);
+
+    // Tulis kembali file dengan data baru
+    fs.writeFile(
+      "receivedData.json",
+      JSON.stringify(currentData, null, 2),
+      (err) => {
+        if (err) {
+          console.error("Error writing file:", err);
+          return res.status(500).send("Error saving data");
+        }
+        console.log("Data saved successfully");
+        res.status(200).send("Webhook received");
+      }
+    );
+  });
 };
