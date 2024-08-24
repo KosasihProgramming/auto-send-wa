@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/PalapaController.js");
+const { getTransaksi, sendWa } = require("../controllers/PalapaController");
 
 const router = express.Router();
 
-router.get("/palapa/pendapatan", getPendapatan);
-router.get("/palapa/pendapatan/harian/store", storeHarian);
+router.get("/palapa/transaksi", getTransaksi);
+router.get("/palapa/send", sendWa);
 
 module.exports = router;

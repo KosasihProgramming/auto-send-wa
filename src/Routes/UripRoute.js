@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/UripController.js");
+const { getTransaksi, sendWa } = require("../controllers/UripController");
 
 const router = express.Router();
 
-router.get("/urip/pendapatan", getPendapatan);
-router.get("/urip/pendapatan/harian/store", storeHarian);
+router.get("/urip/transaksi", getTransaksi);
+router.get("/urip/send", sendWa);
 
 module.exports = router;

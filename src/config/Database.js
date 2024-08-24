@@ -96,6 +96,29 @@ const dbPalapa = {
   database: "acc_palapa",
 };
 
+const dbMemsys = {
+  host: "202.157.189.177",
+  port: "3306",
+  user: "aris",
+  password: "Kosasih20!8",
+  database: "db_memsys_all",
+};
+const dbMemsysGtsKemiling = {
+  host: "202.157.189.177",
+  port: "3306",
+  user: "aris",
+  password: "Kosasih20!8",
+  database: "db_memsys_gtskemiling",
+};
+
+const dbMemsysGtsTirtayasa = {
+  host: "202.157.189.177",
+  port: "3306",
+  user: "aris",
+  password: "Kosasih20!8",
+  database: "db_memsys_gtstirtayasa",
+};
+
 const poolKemiling = mysql.createPool(dbKemiling);
 const connectionKemiling = poolKemiling.promise();
 
@@ -132,6 +155,13 @@ const connectionBugis = poolBugis.promise();
 const poolPalapa = mysql.createPool(dbPalapa);
 const connectionPalapa = poolPalapa.promise();
 
+const poolMemsys = mysql.createPool(dbMemsys);
+const connectionMemsys = poolMemsys.promise();
+
+const poolMemsysGtsKemiling = mysql.createPool(dbMemsysGtsKemiling);
+const connectionMemsysGtsKemiling = poolMemsysGtsKemiling.promise();
+const poolMemsysGtsTirtayasa = mysql.createPool(dbMemsysGtsTirtayasa);
+const connectionMemsysGtsTirtayasa = poolMemsysGtsTirtayasa.promise();
 module.exports = {
   connectionKemiling,
   connectionGtsKemiling,
@@ -145,4 +175,7 @@ module.exports = {
   connectionTeluk,
   connectionBugis,
   connectionPalapa,
+  connectionMemsys,
+  connectionMemsysGtsKemiling,
+  connectionMemsysGtsTirtayasa,
 };

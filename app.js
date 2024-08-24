@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const cron = require("node-cron");
-
+const bodyParser = require("body-parser");
+const webhookRoutes = require("./src/Routes/webHookRoutes");
 const KemilingRoute = require("./src/Routes/KemilingRoute");
 const GtsKemilingRoute = require("./src/Routes/GtsKemilingRoute");
 const GtsTirtaRoute = require("./src/Routes/GtsTirtayasaRoute");
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 // Menggunakan route yang telah diimport
+app.use(webhookRoutes);
 app.use(KemilingRoute);
 app.use(GtsKemilingRoute);
 app.use(GtsTirtaRoute);

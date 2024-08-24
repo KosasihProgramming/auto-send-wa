@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/TelukController.js");
+const { getTransaksi, sendWa } = require("../controllers/TelukController");
 
 const router = express.Router();
 
-router.get("/teluk/pendapatan", getPendapatan);
-router.get("/teluk/pendapatan/harian/store", storeHarian);
+router.get("/teluk/transaksi", getTransaksi);
+router.get("/teluk/send", sendWa);
 
 module.exports = router;

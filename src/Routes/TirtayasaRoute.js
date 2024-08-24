@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/TirtayasaController.js");
+const { getTransaksi, sendWa } = require("../controllers/TirtayasaController");
 
 const router = express.Router();
 
-router.get("/tirtayasa/pendapatan", getPendapatan);
-router.get("/tirtayasa/pendapatan/harian/store", storeHarian);
+router.get("/tirta/transaksi", getTransaksi);
+router.get("/tirta/send", sendWa);
 
 module.exports = router;

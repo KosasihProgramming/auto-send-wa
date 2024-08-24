@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/BugisController.js");
+const { getTransaksi, sendWa } = require("../controllers/BugisController.js");
 
 const router = express.Router();
 
-router.get("/bugis/pendapatan", getPendapatan);
-router.get("/bugis/pendapatan/harian/store", storeHarian);
+router.get("/bugis/transaksi", getTransaksi);
+router.get("/bugis/send", sendWa);
 
 module.exports = router;

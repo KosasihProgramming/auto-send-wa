@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/TuguController.js");
+const { getTransaksi, sendWa } = require("../controllers/TuguController");
 
 const router = express.Router();
 
-router.get("/tugu/pendapatan", getPendapatan);
-router.get("/tugu/pendapatan/harian/store", storeHarian);
+router.get("/tugu/transaksi", getTransaksi);
+router.get("/tugu/send", sendWa);
 
 module.exports = router;

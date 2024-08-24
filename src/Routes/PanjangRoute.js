@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/PanjangController.js");
+const { getTransaksi, sendWa } = require("../controllers/PanjangController");
 
 const router = express.Router();
 
-router.get("/panjang/pendapatan", getPendapatan);
-router.get("/panjang/pendapatan/harian/store", storeHarian);
+router.get("/panjang/transaksi", getTransaksi);
+router.get("/panjang/send", sendWa);
 
 module.exports = router;

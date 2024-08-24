@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/GadingController.js");
+const { getTransaksi, sendWa } = require("../controllers/GadingController.js");
 
 const router = express.Router();
 
-router.get("/gading/pendapatan", getPendapatan);
-router.get("/gading/pendapatan/harian/store", storeHarian);
+router.get("/gading/transaksi", getTransaksi);
+router.get("/gading/send", sendWa);
 
 module.exports = router;

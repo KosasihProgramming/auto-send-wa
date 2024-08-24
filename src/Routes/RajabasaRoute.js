@@ -1,12 +1,9 @@
 const express = require("express");
-const {
-  getPendapatan,
-  storeHarian,
-} = require("../controllers/RajabasaController.js");
+const { getTransaksi, sendWa } = require("../controllers/RajabasaController");
 
 const router = express.Router();
 
-router.get("/rajabasa/pendapatan", getPendapatan);
-router.get("/rajabasa/pendapatan/harian/store", storeHarian);
+router.get("/rajabasa/transaksi", getTransaksi);
+router.get("/rajabasa/send", sendWa);
 
 module.exports = router;
