@@ -22,41 +22,40 @@
 //   }
 // };
 
-const fs = require("fs");
 const path = require("path");
+const { sendMessage } = require("../functions/Utils");
+const fs = require("fs");
 
 exports.handleIncomingMessage = (req, res) => {
   const incomingData = req.body;
   const filePath = path.join(__dirname, "../receivedData.json");
   console.log("request", req.body);
-  // Cek apakah file 'receivedData.json' sudah ada
-  if (!fs.existsSync(filePath)) {
-    // Jika file belum ada, buat file kosong dengan array
-    fs.writeFileSync(filePath, "[]"); // Menginisialisasi file sebagai array kosong
+
+  const dataReceive = incomingData.data;
+
+  let text = "";
+
+  if (dataReceive.is_from_me == true) {
+    text = `<b>Chat Dari Admin </b>\n<b>Pesan</b> : ${dataReceive.message_body}`;
+  } else {
+    text = `<b>Chat Dari Pasien </b>\n<b>No. WA. Pasien :${dataReceive.name} </b>\n<b>Pesan</b> : ${dataReceive.message_body}`;
   }
 
-  // Baca file yang sudah ada
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Error reading data");
-    }
-    console.log("data receive", data);
-    console.log("err receive", err);
-    // Jika data kosong, inisialisasi sebagai array kosong
-    const currentData = data ? JSON.parse(data) : [];
-
-    // Tambahkan data baru
-    currentData.push(incomingData);
-
-    // Tulis kembali file dengan data baru
-    fs.writeFile(filePath, JSON.stringify(currentData, null, 2), (err) => {
-      if (err) {
-        console.error("Error writing file:", err);
-        return res.status(500).send("Error saving data");
-      }
-      console.log("Data saved successfully");
-      res.status(200).send("Webhook received");
+  sendMessage(text)
+    .then(() => {
+      // Mengirimkan respons JSON setelah pesan berhasil dikirim
+      return res.json({
+        success: true,
+        message: "Pesan berhasil dikirim",
+        sentMessage: text,
+      });
+    })
+    .catch((error) => {
+      // Mengirimkan respons JSON jika terjadi kesalahan saat mengirim pesan
+      return res.status(500).json({
+        success: false,
+        message: "Gagal mengirim pesan",
+        error: error.message,
+      });
     });
-  });
 };

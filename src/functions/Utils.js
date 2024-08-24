@@ -140,8 +140,8 @@ const sendMessage = async (text) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          chat_id: "6546310886",
-
+          chat_id: "-1001812360373",
+          message_thread_id: "531",
           text: text,
           parse_mode: "html",
         }),
