@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const webhookController = require("../Controllers/webhookController");
+const webhookController = require("../controllers/webHook");
 const fs = require("fs");
 const path = require("path");
 

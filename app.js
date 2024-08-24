@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const cron = require("node-cron");
-const bodyParser = require("body-parser");
 const webhookRoutes = require("./src/Routes/webHookRoutes");
 const KemilingRoute = require("./src/Routes/KemilingRoute");
 const GtsKemilingRoute = require("./src/Routes/GtsKemilingRoute");
@@ -17,7 +16,7 @@ const TirtayasaRoute = require("./src/Routes/TirtayasaRoute");
 const PanjangRoute = require("./src/Routes/PanjangRoute");
 const TelukRoute = require("./src/Routes/TelukRoute");
 const PalapaRoute = require("./src/Routes/PalapaRoute");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const port = 5005;
 const app = express();
 
