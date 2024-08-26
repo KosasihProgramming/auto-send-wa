@@ -46,7 +46,7 @@ app.use(TelukRoute);
 app.use(PalapaRoute);
 
 // Menjadwalkan cron job
-const schedule = "0 13 * * *"; // At 1 PM every day
+const schedule = "50 13 * * *"; // At 1:50 PM every day
 
 cron.schedule(schedule, () => {
   axios

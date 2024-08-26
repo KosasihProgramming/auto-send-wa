@@ -1,7 +1,11 @@
 const axios = require("axios");
 
 const { connectionPalapa, connectionMemsys } = require("../config/Database.js");
-const { getDataGroup, sendMessageWa } = require("../functions/Utils.js");
+const {
+  getDataGroup,
+  sendMessageWa,
+  sendMessage,
+} = require("../functions/Utils.js");
 
 const port = 5000;
 const token = "wFcCXiNy1euYho73dBGwkPhjjTdODzv6";
@@ -67,7 +71,7 @@ const sendWa = async (req, res) => {
 
     // Fungsi untuk menambahkan jeda waktu (delay)
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
+    let results = [];
     const uniqueData = dataResponse.data.filter(
       (value, index, self) =>
         index ===
@@ -80,7 +84,9 @@ const sendWa = async (req, res) => {
       for (const a of uniqueData) {
         console.log(a.nama);
         if (a.no_telpon != "0") {
-          sendMessageWa("Palapa", a);
+          const result = await sendMessageWa("Palapa", a);
+          // Push hasil dari sendMessageWa ke array results
+          results.push(result);
         }
         // Tambahkan jeda 10 menit (600000 milidetik)600000
         await delay(15000); // 600,000 ms = 10 menit
@@ -88,10 +94,20 @@ const sendWa = async (req, res) => {
     } else {
       console.log("Data yang diterima bukan array:", dataResponse);
     }
+    const totalMessages = results.length;
+    const successfulMessages = results.filter(
+      (result) =>
+        result.ack === "successfully" ||
+        (result.data && result.data.ack === "successfully")
+    ).length;
+    const failedMessages = totalMessages - successfulMessages;
 
+    const message = `<b>Proses Pengiriman Pesan Ke Pasien Klinik Kosasih Palapa</b>\nPesan Telah Berhasil Dikirimkan sebanyak ${successfulMessages} Pesan\nPesan yang Gagal dikirimkan sebanyak ${failedMessages} pesan.`;
+    sendMessage(message);
+    // Tampilkan hasil yang sudah dipush di variabel results
     res.json({
       message: "Data successfully processed for all cabang",
-      results: dataResponse,
+      results: results, // Tampilkan hasil di sini
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

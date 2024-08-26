@@ -1,6 +1,7 @@
 const axios = require("axios");
 const moment = require("moment");
 const { connectionTeluk } = require("../config/Database.js");
+const path = require("path");
 
 require("moment/locale/id"); // Mengimpor bahasa Indonesia untuk moment.js
 
@@ -9,7 +10,7 @@ moment.locale("id");
 
 const sendMessageWa = async (cabang, data) => {
   const text = `Selamat datang di Klinik Kosasih ${cabang}, Bapak/Ibu ${data.nama} ☺️🙏 \n \n Terimakasih sudah percayakan Klinik Kosasih sebagai solusi pengobatan anda😊 \n \n  Bagaimana pelayanan di Klinik Kosasih ${cabang} ? \n *Silahkan ketik A atau B.*  \n A. Puas ✅ \n B. Kurang puas \n \n Jika berkenan, *tolong berikan alasan atas pilihan Anda Pada Link Dibawah Ini*. Sehat Selalu Bapak/Ibu. Terima kasih 😊👨‍⚕️👩‍⚕️ \nhttps://bit.ly/form-penilaian-kosasih`;
-  console.log("Klinik", cabang);
+
   try {
     const response = await axios.post(
       "https://api.watzap.id/v1/send_message",
@@ -17,6 +18,7 @@ const sendMessageWa = async (cabang, data) => {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
         phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
+        // phone_no: "6281278965100", // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {
@@ -27,12 +29,41 @@ const sendMessageWa = async (cabang, data) => {
     );
 
     console.log("Pesan berhasil dikirim:", response.data);
-    return response.data;
+    return {
+      success: true,
+      data: response.data,
+      nama: data.nama,
+      no_telpon: data.no_telpon,
+    };
   } catch (error) {
     console.error("Gagal mengirim pesan:", error);
-    return error;
+    return {
+      success: false,
+      error: error.message,
+      nama: data.nama,
+      no_telpon: data.no_telpon,
+    };
   }
 };
+
+// Fungsi untuk menyimpan data ke file JSON
+const saveToJsonFile = (fileName, data) => {
+  const filePath = path.join(__dirname, "..", "data", fileName);
+  let fileData = [];
+
+  // Baca file JSON yang sudah ada
+  if (fs.existsSync(filePath)) {
+    const existingData = fs.readFileSync(filePath);
+    fileData = JSON.parse(existingData);
+  }
+
+  // Tambahkan data baru
+  fileData.push(data);
+
+  // Tulis kembali ke file JSON
+  fs.writeFileSync(filePath, JSON.stringify(fileData, null, 2), "utf8");
+};
+
 function formatPhoneNumber(input) {
   // Hilangkan spasi, tanda hubung, dan karakter yang tidak diperlukan
   let cleaned = input.replace(/\D/g, "");
@@ -55,6 +86,7 @@ const sendMessageWaGts = async (cabang, data) => {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
         phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
+        // phone_no: "6281278965100", // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {
@@ -180,4 +212,5 @@ module.exports = {
   sendMessage,
   getTanggalInfo,
   getDataGroup,
+  saveToJsonFile,
 };

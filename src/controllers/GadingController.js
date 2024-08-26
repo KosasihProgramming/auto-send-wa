@@ -1,7 +1,11 @@
 const axios = require("axios");
 
 const { connectionGading, connectionMemsys } = require("../config/Database.js");
-const { getDataGroup, sendMessageWa } = require("../functions/Utils.js");
+const {
+  getDataGroup,
+  sendMessageWa,
+  sendMessage,
+} = require("../functions/Utils.js");
 
 const port = 5000;
 const token = "wFcCXiNy1euYho73dBGwkPhjjTdODzv6";
@@ -74,12 +78,16 @@ const sendWa = async (req, res) => {
           (t) => t.nama === value.nama && t.no_telpon === value.no_telpon
         )
     );
+    let results = [];
+
     // Cek apakah dataResponse adalah array sebelum menggunakan loop
     if (Array.isArray(uniqueData)) {
       for (const a of uniqueData) {
         console.log(a.nama);
         if (a.no_telpon != "0") {
-          sendMessageWa("Sumber Waras", a);
+          const result = await sendMessageWa("Sumber Waras", a);
+          // Push hasil dari sendMessageWa ke array results
+          results.push(result);
         }
         // Tambahkan jeda 10 menit (600000 milidetik)600000
         await delay(15000); // 600,000 ms = 10 menit
@@ -88,9 +96,21 @@ const sendWa = async (req, res) => {
       console.log("Data yang diterima bukan array:", dataResponse);
     }
 
+    const totalMessages = results.length;
+    const successfulMessages = results.filter(
+      (result) =>
+        result.success ||
+        result.ack === "successfully" ||
+        (result.data && result.data.ack === "successfully")
+    ).length;
+    const failedMessages = totalMessages - successfulMessages;
+
+    const message = `<b>Proses Pengiriman Pesan Ke Pasien Klinik Kosasih Sumber Waras</b>\nPesan Telah Berhasil Dikirimkan sebanyak ${successfulMessages} Pesan\nPesan yang Gagal dikirimkan sebanyak ${failedMessages} pesan.`;
+    sendMessage(message);
+    // Tampilkan hasil yang sudah dipush di variabel results
     res.json({
       message: "Data successfully processed for all cabang",
-      results: dataResponse,
+      results: results, // Tampilkan hasil di sini
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
