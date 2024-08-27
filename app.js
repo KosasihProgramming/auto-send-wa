@@ -19,7 +19,6 @@ const PalapaRoute = require("./src/Routes/PalapaRoute");
 const bodyParser = require("body-parser");
 const port = 5000;
 const app = express();
-const fetch = require("node-fetch");
 
 app.use(bodyParser.json());
 app.use(cors());
