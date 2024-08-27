@@ -68,6 +68,8 @@ let currentIndex = 0;
 // Jadwalkan cron job untuk berjalan setiap 30 menit, dimulai jam 9 pagi
 cron.schedule("*/30 9-17 * * *", async () => {
   try {
+    const fetch = (...args) =>
+      import("node-fetch").then(({ default: fetch }) => fetch(...args));
     const url = urls[currentIndex];
     console.log(`Mengakses: ${url}`);
     const response = await fetch(url);
