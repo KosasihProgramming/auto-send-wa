@@ -33,7 +33,10 @@ exports.handleIncomingMessage = (req, res) => {
 
   const dataReceive = incomingData.data;
 
-  if (dataReceive.is_from_me == false && dataReceive.name !== "status") {
+  if (
+    (dataReceive.is_from_me == false && dataReceive.name !== "status") ||
+    dataReceive.message_body !== ""
+  ) {
     const text = `<b>Chat Dari Pasien </b>\n<b>No. WA. Pasien :</b> ${dataReceive.name} \n<b>Pesan</b> : ${dataReceive.message_body}`;
 
     sendMessage(text)
