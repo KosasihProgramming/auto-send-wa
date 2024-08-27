@@ -19,6 +19,7 @@ const PalapaRoute = require("./src/Routes/PalapaRoute");
 const bodyParser = require("body-parser");
 const port = 5000;
 const app = express();
+const fetch = require("node-fetch");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -46,17 +47,38 @@ app.use(TelukRoute);
 app.use(PalapaRoute);
 
 // Menjadwalkan cron job
-const schedule = "0 9 * * *"; // At 9:00 AM every day
 
-cron.schedule(schedule, () => {
-  axios
-    .get("http://202.157.189.177:5000/run")
-    .then((response) => {
-      console.log(`Success: ${response.data}`);
-    })
-    .catch((error) => {
-      console.error(`Error: ${error.message}`);
-    });
+const urls = [
+  `http://202.157.189.177:5000/bugis/send`,
+  `http://202.157.189.177:5000/gading/send`,
+  `http://202.157.189.177:5000/kemiling/send`,
+  `http://202.157.189.177:5000/palapa/send`,
+  `http://202.157.189.177:5000/panjang/send`,
+  `http://202.157.189.177:5000/rajabasa/send`,
+  `http://202.157.189.177:5000/teluk/send`,
+  `http://202.157.189.177:5000/tirta/send`,
+  `http://202.157.189.177:5000/tugu/send`,
+  `http://202.157.189.177:5000/urip/send`,
+  `http://202.157.189.177:5000/gts-kemiling/send`,
+  `http://202.157.189.177:5000/gts-tirta/send`,
+];
+
+let currentIndex = 0;
+
+// Jadwalkan cron job untuk berjalan setiap 30 menit, dimulai jam 9 pagi
+cron.schedule("*/30 9-17 * * *", async () => {
+  try {
+    const url = urls[currentIndex];
+    console.log(`Mengakses: ${url}`);
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Response:", data);
+
+    // Update indeks untuk mengakses URL berikutnya
+    currentIndex = (currentIndex + 1) % urls.length;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 });
 
 app.listen(port, () => {
