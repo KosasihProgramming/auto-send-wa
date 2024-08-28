@@ -62,7 +62,7 @@ const sendWa = async (req, res) => {
     const fetch = (await import("node-fetch")).default;
 
     // Fetch data untuk setiap akun
-    const response = await fetch(`http://202.157.189.177:5000/teluk/transaksi`);
+    const response = await fetch(`http://localhost:5000/teluk/transaksi`);
     const dataResponse = await response.json();
 
     // Fungsi untuk menambahkan jeda waktu (delay)

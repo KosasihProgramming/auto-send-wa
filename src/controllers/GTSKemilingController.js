@@ -70,7 +70,7 @@ const sendWa = async (req, res) => {
 
     // Fetch data untuk setiap akun
     const response = await fetch(
-      `http://202.157.189.177:5000/gts-kemiling/transaksi`
+      `http://localhost:5000/gts-kemiling/transaksi`
     );
     const dataResponse = await response.json();
 

@@ -63,7 +63,7 @@ const getTransaksi = async (req, res) => {
 const sendWa = async (req, res) => {
   try {
     const fetch = (await import("node-fetch")).default;
-    const response = await fetch(`http://202.157.189.177:5000/bugis/transaksi`);
+    const response = await fetch(`http://localhost:5000/bugis/transaksi`);
     const dataResponse = await response.json();
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

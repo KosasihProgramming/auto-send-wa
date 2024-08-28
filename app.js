@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
 const cron = require("node-cron");
+const bodyParser = require("body-parser");
 const webhookRoutes = require("./src/Routes/webHookRoutes");
 const KemilingRoute = require("./src/Routes/KemilingRoute");
 const GtsKemilingRoute = require("./src/Routes/GtsKemilingRoute");
@@ -16,7 +16,7 @@ const TirtayasaRoute = require("./src/Routes/TirtayasaRoute");
 const PanjangRoute = require("./src/Routes/PanjangRoute");
 const TelukRoute = require("./src/Routes/TelukRoute");
 const PalapaRoute = require("./src/Routes/PalapaRoute");
-const bodyParser = require("body-parser");
+
 const port = 5000;
 const app = express();
 
@@ -48,25 +48,27 @@ app.use(PalapaRoute);
 // Menjadwalkan cron job
 
 const urls = [
-  `http://202.157.189.177:5000/bugis/send`,
-  `http://202.157.189.177:5000/gading/send`,
-  `http://202.157.189.177:5000/kemiling/send`,
-  `http://202.157.189.177:5000/palapa/send`,
-  `http://202.157.189.177:5000/panjang/send`,
-  `http://202.157.189.177:5000/rajabasa/send`,
-  `http://202.157.189.177:5000/teluk/send`,
-  `http://202.157.189.177:5000/tirta/send`,
-  `http://202.157.189.177:5000/tugu/send`,
-  `http://202.157.189.177:5000/urip/send`,
-  `http://202.157.189.177:5000/gts-kemiling/send`,
-  `http://202.157.189.177:5000/gts-tirta/send`,
+  `http://localhost:5000/bugis/send`,
+  `http://localhost:5000/gading/send`,
+  `http://localhost:5000/kemiling/send`,
+  `http://localhost:5000/palapa/send`,
+  `http://localhost:5000/panjang/send`,
+  `http://localhost:5000/rajabasa/send`,
+  `http://localhost:5000/teluk/send`,
+  `http://localhost:5000/tirta/send`,
+  `http://localhost:5000/tugu/send`,
+  `http://localhost:5000/urip/send`,
+  `http://localhost:5000/gts-kemiling/send`,
+  `http://localhost:5000/gts-tirta/send`,
 ];
 
 let currentIndex = 0;
 
-// Jadwalkan cron job untuk berjalan setiap 30 menit, dimulai jam 9 pagi
-cron.schedule("*/30 9-17 * * *", async () => {
+// Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 9 pagi
+// Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 14.00 sampai 17.30
+cron.schedule("0,30 14-17 * * *", async () => {
   try {
+    // Menggunakan fetch dengan import dinamis
     const fetch = (...args) =>
       import("node-fetch").then(({ default: fetch }) => fetch(...args));
     const url = urls[currentIndex];

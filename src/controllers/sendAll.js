@@ -6,18 +6,18 @@ const RunAll = async (req, res) => {
   try {
     const fetch = (await import("node-fetch")).default;
     const urls = [
-      `http://202.157.189.177:5000/bugis/send`,
-      `http://202.157.189.177:5000/gading/send`,
-      `http://202.157.189.177:5000/kemiling/send`,
-      `http://202.157.189.177:5000/palapa/send`,
-      `http://202.157.189.177:5000/panjang/send`,
-      `http://202.157.189.177:5000/rajabasa/send`,
-      `http://202.157.189.177:5000/teluk/send`,
-      `http://202.157.189.177:5000/tirta/send`,
-      `http://202.157.189.177:5000/tugu/send`,
-      `http://202.157.189.177:5000/urip/send`,
-      `http://202.157.189.177:5000/gts-kemiling/send`,
-      `http://202.157.189.177:5000/gts-tirta/send`,
+      `http://localhost:5000/bugis/send`,
+      `http://localhost:5000/gading/send`,
+      `http://localhost:5000/kemiling/send`,
+      `http://localhost:5000/palapa/send`,
+      `http://localhost:5000/panjang/send`,
+      `http://localhost:5000/rajabasa/send`,
+      `http://localhost:5000/teluk/send`,
+      `http://localhost:5000/tirta/send`,
+      `http://localhost:5000/tugu/send`,
+      `http://localhost:5000/urip/send`,
+      `http://localhost:5000/gts-kemiling/send`,
+      `http://localhost:5000/gts-tirta/send`,
     ];
 
     // Create an array of fetch promises
