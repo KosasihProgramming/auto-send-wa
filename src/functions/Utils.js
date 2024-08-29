@@ -17,8 +17,8 @@ const sendMessageWa = async (cabang, data) => {
       {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
-        // phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
-        phone_no: "6281278965100", // Ganti dengan nomor tujuan
+        phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
+        // phone_no: "6281278965100", // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {
@@ -85,8 +85,8 @@ const sendMessageWaGts = async (cabang, data) => {
       {
         api_key: "C6E5LRGZKQIWLTQP", // Ganti dengan API key Anda
         number_key: "veECpkJBvMQ0GFDE", // Ganti dengan number key Anda
-        // phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
-        phone_no: "6281278965100", // Ganti dengan nomor tujuan
+        phone_no: formatPhoneNumber(data.no_telpon), // Ganti dengan nomor tujuan
+        // phone_no: "6281278965100", // Ganti dengan nomor tujuan
         message: text, // Ganti dengan pesan yang ingin dikirim
       },
       {

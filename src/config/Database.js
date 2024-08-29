@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 
 const dbKemiling = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -9,7 +9,7 @@ const dbKemiling = {
 };
 
 const dbGtsKemiling = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -17,7 +17,7 @@ const dbGtsKemiling = {
 };
 
 const dbGtsTirtayasa = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -25,7 +25,7 @@ const dbGtsTirtayasa = {
 };
 
 const dbGading = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -33,7 +33,7 @@ const dbGading = {
 };
 
 const dbRajabasa = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -41,7 +41,7 @@ const dbRajabasa = {
 };
 
 const dbUrip = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -49,7 +49,7 @@ const dbUrip = {
 };
 
 const dbTugu = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -57,7 +57,7 @@ const dbTugu = {
 };
 
 const dbTirtayasa = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -65,7 +65,7 @@ const dbTirtayasa = {
 };
 
 const dbPanjang = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -73,7 +73,7 @@ const dbPanjang = {
 };
 
 const dbTeluk = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -81,7 +81,7 @@ const dbTeluk = {
 };
 
 const dbBugis = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -89,7 +89,7 @@ const dbBugis = {
 };
 
 const dbPalapa = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -97,14 +97,14 @@ const dbPalapa = {
 };
 
 const dbMemsys = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
   database: "db_memsys_all",
 };
 const dbMemsysGtsKemiling = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",
@@ -112,7 +112,7 @@ const dbMemsysGtsKemiling = {
 };
 
 const dbMemsysGtsTirtayasa = {
-  host: "localhost",
+  host: "202.157.189.177",
   port: "3306",
   user: "aris",
   password: "Kosasih20!8",

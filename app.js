@@ -66,7 +66,7 @@ let currentIndex = 0;
 
 // Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 9 pagi
 // Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 14.00 sampai 17.30
-cron.schedule("0,30 14-17 * * *", async () => {
+cron.schedule("0,30 10-17 * * *", async () => {
   try {
     // Menggunakan fetch dengan import dinamis
     const fetch = (...args) =>
