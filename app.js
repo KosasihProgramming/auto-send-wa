@@ -64,9 +64,7 @@ const urls = [
 
 let currentIndex = 0;
 
-// Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 9 pagi
-// Jadwalkan cron job untuk bergantian mengakses URL setiap 30 menit, dimulai jam 14.00 sampai 17.30
-cron.schedule("0,30 10-17 * * *", async () => {
+cron.schedule("0,30 10-14 * * *", async () => {
   try {
     // Menggunakan fetch dengan import dinamis
     const fetch = (...args) =>
@@ -78,6 +76,23 @@ cron.schedule("0,30 10-17 * * *", async () => {
     console.log("Response:", data);
 
     // Update indeks untuk mengakses URL berikutnya
+    currentIndex = (currentIndex + 1) % urls.length;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+});
+
+// Tambahkan job tambahan untuk jam 15:00 dan 15:30
+cron.schedule("0,30 15 * * *", async () => {
+  try {
+    const fetch = (...args) =>
+      import("node-fetch").then(({ default: fetch }) => fetch(...args));
+    const url = urls[currentIndex];
+    console.log(`Mengakses: ${url}`);
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Response:", data);
+
     currentIndex = (currentIndex + 1) % urls.length;
   } catch (error) {
     console.error("Error:", error.message);
